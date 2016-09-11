@@ -1,0 +1,13 @@
+# IDEA project files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Node files
+node_modules/
+npm-debug.log
+
+# Gradle files
+.gradle
+build
