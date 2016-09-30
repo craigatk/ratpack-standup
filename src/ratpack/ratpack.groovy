@@ -59,5 +59,8 @@ ratpack {
                 }
             }
         }
+        /*files {
+            dir("static").indexFiles("index.html")
+        }*/
     }
 }
