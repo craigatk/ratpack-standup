@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath "io.ratpack:ratpack-gradle:1.4.1"
+    classpath "io.ratpack:ratpack-gradle:1.4.2"
   }
 }
 
@@ -16,4 +16,9 @@ repositories {
 
 dependencies {
   runtime "org.slf4j:slf4j-simple:1.7.21"
+
+  testCompile ratpack.dependency('test')
+  testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+  testCompile 'cglib:cglib:2.2.2'
+  testCompile 'org.objenesis:objenesis:2.1'
 }
