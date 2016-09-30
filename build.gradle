@@ -16,6 +16,8 @@ repositories {
 
 dependencies {
   compile ratpack.dependency("guice")
+  compile 'com.h2database:h2:1.4.190'
+  compile 'org.jdbi:jdbi:2.77'
 
   runtime "org.slf4j:slf4j-simple:1.7.21"
 

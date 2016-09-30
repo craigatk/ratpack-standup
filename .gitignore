@@ -11,3 +11,6 @@ npm-debug.log
 # Gradle files
 .gradle
 build
+
+# Log files
+logs/*.log
