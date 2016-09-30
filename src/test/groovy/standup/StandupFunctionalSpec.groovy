@@ -38,7 +38,9 @@ class StandupFunctionalSpec extends Specification {
         assert getAllResponse.statusCode == 200
 
         when:
-        List<Status> allStatusList = jsonSlurper.parseText(getAllResponse.body.text)
+        def parsedJson = jsonSlurper.parseText(getAllResponse.body.text)
+
+        List<Status> allStatusList = parsedJson as List
 
         then:
         assert allStatusList.size() == 1

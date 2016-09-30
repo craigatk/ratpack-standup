@@ -1,29 +1,34 @@
 import groovy.json.JsonSlurper
+import standup.DefaultStatusService
 import standup.Status
+import standup.StatusService
 
 import static groovy.json.JsonOutput.toJson
 import static ratpack.groovy.Groovy.ratpack
 
-List<Status> statusStorage = []
-JsonSlurper jsonSlurper = new JsonSlurper()
-
 ratpack {
+    bindings {
+        bindInstance(StatusService, new DefaultStatusService())
+        bindInstance(JsonSlurper, new JsonSlurper())
+    }
     handlers {
         prefix("api") {
             prefix("status") {
-                post {
+                post { JsonSlurper jsonSlurper, StatusService statusService ->
                     request.body.map { body ->
                         jsonSlurper.parseText(body.text) as Map
                     }.map { data ->
                         new Status(data)
+                    }.flatMap { status ->
+                        statusService.create(status)
                     }.then { status ->
-                        statusStorage << status
-
                         response.send(toJson(status))
                     }
                 }
-                get("all") {
-                    response.send(toJson(statusStorage))
+                get("all") { StatusService statusService ->
+                    statusService.list().then { statusList ->
+                        response.send(toJson(statusList))
+                    }
                 }
             }
         }
