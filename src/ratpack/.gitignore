@@ -1,1 +1,3 @@
+# Output files from Webpack build
 static/assets
+static/index.html
