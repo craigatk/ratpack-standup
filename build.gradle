@@ -49,6 +49,10 @@ node {
   nodeModulesDir = file("${project.projectDir}/src/app")
 }
 
-task jsTest(type: NpmTask, dependsOn: 'npmInstall') {
+task testJs(type: NpmTask, dependsOn: 'npmInstall') {
+  inputs.dir('src/app/test/unit')
+  outputs.dir('src/app/test/reports')
   args = ['run', 'test']
 }
+
+check.dependsOn('testJs')

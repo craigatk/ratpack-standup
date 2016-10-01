@@ -55,7 +55,7 @@ module.exports = function (config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
-    reporters: ['spec'],
+    reporters: ['spec', 'junit'],
     files: [
       '../../node_modules/babel-polyfill/dist/polyfill.js',
       './index.js'
@@ -66,6 +66,10 @@ module.exports = function (config) {
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
+    },
+    junitReporter: {
+      outputDir: '../reports', // results will be saved as $outputDir/$browserName.xml
+      outputFile: undefined, // if included, results will be saved as $outputDir/$browserName/$outputFile
     }
   })
 }
