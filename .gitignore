@@ -13,4 +13,4 @@ npm-debug.log
 /build
 
 # Log files
-logs/*.log
+ratpack.log

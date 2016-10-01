@@ -4,6 +4,7 @@ buildscript {
   }
   dependencies {
     classpath "io.ratpack:ratpack-gradle:1.4.2"
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
   }
 }
 
@@ -12,6 +13,7 @@ plugins {
 }
 
 apply plugin: "io.ratpack.ratpack-groovy"
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: "idea"
 
 repositories {
@@ -52,7 +54,16 @@ node {
 task testJs(type: NpmTask, dependsOn: 'npmInstall') {
   inputs.dir('src/app/test/unit')
   outputs.dir('src/app/test/reports')
+
   args = ['run', 'test']
 }
-
 check.dependsOn('testJs')
+
+task assembleJs(type: NpmTask, dependsOn: 'npmInstall') {
+  inputs.dir('src/app')
+  outputs.dir('src/ratpack/static/assets')
+  outputs.file('src/ratpack/static/index.html')
+
+  args = ['run', 'build']
+}
+shadowJar.dependsOn('assembleJs')
