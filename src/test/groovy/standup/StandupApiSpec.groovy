@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 import static groovy.json.JsonOutput.toJson
 
-class StandupFunctionalSpec extends Specification {
+class StandupApiSpec extends Specification {
     @AutoCleanup
     def aut = new GroovyRatpackMainApplicationUnderTest()
 

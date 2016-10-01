@@ -31,6 +31,11 @@ dependencies {
   testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
   testCompile 'cglib:cglib:2.2.2'
   testCompile 'org.objenesis:objenesis:2.1'
+
+  testCompile("org.gebish:geb-spock:1.0-rc-1") {
+    exclude group: "org.codehaus.groovy", module: "groovy-all"
+  }
+  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
 }
 
 node {
@@ -50,6 +55,15 @@ node {
   // Set the work directory where node_modules should be located
   nodeModulesDir = file("${project.projectDir}/src/app")
 }
+
+test {
+  exclude '**/*GebSpec*'
+}
+
+task testBrowser(type: Test, dependsOn: 'assembleJs') {
+  include '**/*GebSpec*'
+}
+check.dependsOn('testBrowser')
 
 task testJs(type: NpmTask, dependsOn: 'npmInstall') {
   inputs.dir('src/app/test/unit')

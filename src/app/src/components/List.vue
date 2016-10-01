@@ -1,16 +1,16 @@
 <template>
     <div class="row">
       <div class="col-md-9">
-        <div class="panel panel-default" v-for="status in statusList">
-          <div class="panel-heading">{{status.name}}</div>
+        <div class="panel panel-default status-display" v-for="status in statusList">
+          <div class="panel-heading name">{{status.name}}</div>
           <div class="panel-body">
             <dl class="dl-horizontal">
               <dt>Completed yesterday</dt>
-              <dd>{{status.yesterday}}</dd>
+              <dd class="yesterday">{{status.yesterday}}</dd>
               <dt>Working on today</dt>
-              <dd>{{status.today}}</dd>
+              <dd class="today">{{status.today}}</dd>
               <dt>Impediments</dt>
-              <dd>{{status.impediments}}</dd>
+              <dd class="impediments">{{status.impediments}}</dd>
             </dl>
           </div>
         </div>
