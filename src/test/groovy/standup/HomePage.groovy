@@ -24,11 +24,11 @@ class HomePage extends Page {
         submitButton.click()
     }
 
-    List<Status> allStatusDisplays() {
-        statusDisplayList.collect { it.status }
+    int getNumberOfStatusDisplays() {
+        statusDisplayList.size()
     }
 
-    Status findStatusFor(String name) {
-        statusDisplayList.find { it.status?.name == name }?.status
+    StatusDisplayModule findStatusFor(String name) {
+        statusDisplayList.find { it.name == name }
     }
 }

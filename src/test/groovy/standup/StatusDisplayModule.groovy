@@ -10,12 +10,19 @@ class StatusDisplayModule extends Module {
         impedimentsSection { $(".impediments") }
     }
 
-    Status getStatus() {
-        new Status(
-                name: nameSection.text(),
-                yesterday: yesterdaySection.text(),
-                today: todaySection.text(),
-                impediments: impedimentsSection.text()
-        )
+    String getName() {
+        nameSection.text()
+    }
+
+    String getYesterday() {
+        yesterdaySection.text()
+    }
+
+    String getToday() {
+        todaySection.text()
+    }
+
+    String getImpediments() {
+        impedimentsSection.text()
     }
 }

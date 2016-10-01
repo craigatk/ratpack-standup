@@ -25,12 +25,11 @@ class StandupGebSpec extends GebReportingSpec {
         homePage.submitStatus(name, yesterday, today)
 
         then:
-        waitFor { homePage.allStatusDisplays()?.size() == 1 }
+        waitFor { homePage.numberOfStatusDisplays == 1 }
 
         and:
-        Status myStatus = homePage.findStatusFor(name)
-        assert myStatus
-        assert myStatus.yesterday == yesterday
+        StatusDisplayModule myStatus = homePage.findStatusFor(name)
+        assert myStatus?.yesterday == yesterday
         assert myStatus.today == today
     }
 }
