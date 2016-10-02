@@ -5,12 +5,12 @@ import ratpack.groovy.sql.SqlModule
 import ratpack.service.Service
 import ratpack.service.StartEvent
 import standup.DefaultStatusService
-import standup.Status
 import standup.StatusService
+import standup.handler.CreateStatusHandler
+import standup.handler.GetAllStatusHandler
 
 import javax.sql.DataSource
 
-import static groovy.json.JsonOutput.toJson
 import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
@@ -23,6 +23,8 @@ ratpack {
                 password: ""
         ))
         bind(StatusService, DefaultStatusService)
+        bind(CreateStatusHandler)
+        bind(GetAllStatusHandler)
         bindInstance(new Service() {
             void onStart(StartEvent e) {
                 Sql sql = e.registry.get(Sql)
@@ -41,22 +43,8 @@ ratpack {
     handlers {
         prefix("api") {
             prefix("status") {
-                post { JsonSlurper jsonSlurper, StatusService statusService ->
-                    request.body.map { body ->
-                        jsonSlurper.parseText(body.text) as Map
-                    }.map { data ->
-                        new Status(data)
-                    }.flatMap { status ->
-                        statusService.create(status)
-                    }.then { status ->
-                        response.send(toJson(status))
-                    }
-                }
-                get("all") { StatusService statusService ->
-                    statusService.list().then { statusList ->
-                        response.send(toJson(statusList))
-                    }
-                }
+                post(CreateStatusHandler)
+                get("all", GetAllStatusHandler)
             }
         }
         files {

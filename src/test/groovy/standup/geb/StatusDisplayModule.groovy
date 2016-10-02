@@ -1,4 +1,4 @@
-package standup
+package standup.geb
 
 import geb.Module
 

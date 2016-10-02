@@ -1,4 +1,4 @@
-package standup
+package standup.geb
 
 import geb.spock.GebReportingSpec
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
