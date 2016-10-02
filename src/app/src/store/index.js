@@ -1,4 +1,4 @@
-/*global fetch*/
+/* global fetch */
 
 import { EventEmitter } from 'events'
 import 'whatwg-fetch'

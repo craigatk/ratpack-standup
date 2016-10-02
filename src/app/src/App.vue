@@ -1,48 +1,33 @@
 <template>
-  <nav class="navbar navbar-default">
+  <div>
+    <navBar></navBar>
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Status</a>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h1>Your Status</h1>
+        </div>
       </div>
+      <submit></submit>
 
-      <div class="collapse navbar-collapse" id="navbar-collapse">
-        <ul class="nav navbar-nav">
-
-        </ul>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h1>Team Status</h1>
+        </div>
       </div>
+      <list></list>
     </div>
-  </nav>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h1>Your Status</h1>
-      </div>
-    </div>
-    <submit></submit>
-
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h1>Team Status</h1>
-      </div>
-    </div>
-    <list></list>
   </div>
 </template>
 
 <script>
 import List from './components/List'
+import NavBar from './components/NavBar'
 import Submit from './components/Submit'
 
 export default {
   components: {
     List,
+    NavBar,
     Submit
   }
 }
