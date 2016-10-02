@@ -1,8 +1,12 @@
-# vue-example
+# Vue.js standup app
 
-> A Vue.js project
+A small Vue.js 2.0 frontend app for a daily standup application. It is built with Webpack and runs tests with Karma + Jasmine.
 
-## Build Setup
+The app was originally built with the [Vue CLI Webpack template](https://github.com/vuejs-templates/webpack)
+
+The server side is a REST API built with the [Ratpack](https://ratpack.io/) JVM framework.
+
+## Commands
 
 ``` bash
 # install dependencies
@@ -12,16 +16,9 @@ npm install
 npm run dev
 
 # build for production with minification
+# the output files end up in the src/ratpack/static folder for exclusion in the Ratpack executable JAR file.
 npm run build
 
 # run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+npm run test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
