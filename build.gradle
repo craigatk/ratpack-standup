@@ -24,6 +24,7 @@ dependencies {
   compile ratpack.dependency("guice")
   compile 'com.h2database:h2:1.4.190'
   compile 'org.jdbi:jdbi:2.77'
+  compile 'org.flywaydb:flyway-core:4.0.3'
 
   runtime "org.slf4j:slf4j-simple:1.7.21"
 
@@ -89,6 +90,5 @@ task assembleJs(type: NpmTask, dependsOn: 'npmInstall') {
   outputs.dir('src/ratpack/static/assets')
   outputs.file('src/ratpack/static/index.html')
   args = ['run', 'build']
-  ignoreExitValue = true
 }
 shadowJar.dependsOn('assembleJs')
