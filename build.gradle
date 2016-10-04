@@ -35,7 +35,14 @@ dependencies {
   testCompile("org.gebish:geb-spock:1.0-rc-1") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
+  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
   testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
+
+  // For downloading browser-specific drivers that browsers like Chrome and IE require
+  // From https://github.com/bonigarcia/webdrivermanager
+  testCompile("io.github.bonigarcia:webdrivermanager:1.4.9") {
+    exclude group: 'org.seleniumhq.selenium'
+  }
 }
 
 node {
@@ -62,6 +69,10 @@ test {
 
 task testBrowser(type: Test, dependsOn: 'assembleJs') {
   include '**/*GebSpec*'
+
+  // Pass system properties through to the testBrowser task so we can pass in the 'geb.env' property to run tests
+  // in different browsers. Adapted from http://mrhaki.blogspot.com/2015/09/grails-goodness-passing-system.html
+  systemProperties System.properties
 }
 check.dependsOn('testBrowser')
 
