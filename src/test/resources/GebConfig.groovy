@@ -1,10 +1,17 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager
+import org.openqa.selenium.Dimension
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 
 reportsDir = "build/geb"
 
-driver = { new FirefoxDriver() }
+driver = {
+    def theDriver = new FirefoxDriver()
+
+    theDriver.manage().window().setSize(new Dimension(500, 900))
+
+    return theDriver
+}
 
 environments {
 

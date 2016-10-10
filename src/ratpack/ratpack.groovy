@@ -13,7 +13,7 @@ import static ratpack.groovy.Groovy.ratpack
 ratpack {
     bindings {
         bindInstance(DataSource, new JdbcDataSource(
-                URL: "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
+                URL: "jdbc:h2:mem:test${System.getProperty('db', '0')};DB_CLOSE_DELAY=-1",
                 user: "sa",
                 password: ""
         ))

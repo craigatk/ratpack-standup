@@ -33,7 +33,7 @@ dependencies {
   testCompile 'cglib:cglib:2.2.2'
   testCompile 'org.objenesis:objenesis:2.1'
 
-  testCompile("org.gebish:geb-spock:1.0-rc-1") {
+  testCompile("org.gebish:geb-spock:1.0") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
   testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
@@ -68,8 +68,12 @@ test {
   exclude '**/*GebSpec*'
 }
 
-task testBrowser(type: Test, dependsOn: 'assembleJs') {
+task testBrowser(type: Test) {
   include '**/*GebSpec*'
+
+  maxParallelForks = 3
+
+  outputs.upToDateWhen { false }
 
   // Pass system properties through to the testBrowser task so we can pass in the 'geb.env' property to run tests
   // in different browsers. Adapted from http://mrhaki.blogspot.com/2015/09/grails-goodness-passing-system.html
