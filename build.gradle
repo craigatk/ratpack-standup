@@ -33,7 +33,7 @@ dependencies {
   testCompile 'cglib:cglib:2.2.2'
   testCompile 'org.objenesis:objenesis:2.1'
 
-  testCompile("org.gebish:geb-spock:1.0-rc-1") {
+  testCompile("org.gebish:geb-spock:1.0") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
   testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
