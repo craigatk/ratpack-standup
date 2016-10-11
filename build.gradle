@@ -68,7 +68,7 @@ test {
   exclude '**/*GebSpec*'
 }
 
-task testBrowser(type: Test) {
+task testBrowser(type: Test, dependsOn: 'assembleJs') {
   include '**/*GebSpec*'
 
   maxParallelForks = 3

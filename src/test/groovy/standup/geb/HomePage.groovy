@@ -17,13 +17,9 @@ class HomePage extends Page {
 
     void submitStatus(String name, String yesterday, String today, String impediments = "") {
         nameField.value(name)
-        //sleep(200)
         yesterdayField.value(yesterday)
-        //sleep(200)
         todayField.value(today)
-        //sleep(200)
         impedimentsField.value(impediments)
-        //sleep(200)
 
         submitButton.click()
     }
