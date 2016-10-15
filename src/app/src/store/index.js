@@ -7,7 +7,7 @@ const store = new EventEmitter()
 
 let statusList = []
 
-let addStatus = (newStatus) => {
+store.addStatus = (newStatus) => {
   if (!statusList) {
     statusList = []
   }
@@ -28,9 +28,7 @@ store.newStatus = (status) => {
   }).then((res) => {
     return res.json()
   }).then((json) => {
-    let newStatus = json
-
-    addStatus(newStatus)
+    // Updates now handled by WebSocket
   })
 }
 

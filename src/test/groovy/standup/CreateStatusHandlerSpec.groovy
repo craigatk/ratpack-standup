@@ -12,8 +12,9 @@ import static groovy.json.JsonOutput.toJson
 class CreateStatusHandlerSpec extends Specification {
     StatusService statusService = Mock()
     JsonSlurper jsonSlurper = new JsonSlurper()
+    StatusBroadcaster statusBroadcaster = Mock()
 
-    Handler handler = new CreateStatusHandler(jsonSlurper, statusService)
+    Handler handler = new CreateStatusHandler(jsonSlurper, statusService, statusBroadcaster)
 
     RequestFixture requestFixture = RequestFixture.requestFixture()
 
@@ -30,6 +31,7 @@ class CreateStatusHandlerSpec extends Specification {
 
             return true
         }) >> Promise.sync { statusToCreate }
+        1 * statusBroadcaster.sendMessage(statusToCreate)
 
         and:
         assert result.status.code == 200

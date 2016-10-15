@@ -3,8 +3,6 @@ import Submit from 'src/components/Submit'
 
 const fetchMock = require('fetch-mock')
 
-import store from 'src/store'
-
 describe('Submit.vue', () => {
   it('should submit status', (done) => {
     fetchMock.post('/api/status', (url, opts) => {
@@ -20,11 +18,11 @@ describe('Submit.vue', () => {
     vm.onSubmit()
 
     setTimeout(() => {
-      expect(store.getStatusList()).toContain({name: 'My Name', yesterday: 'Finished a task', today: 'Starting a task', impediments: null})
-
       let postJson = JSON.parse(fetchMock.lastOptions('/api/status').body)
 
       expect(postJson.name).toEqual('My Name')
+      expect(postJson.yesterday).toEqual('Finished a task')
+      expect(postJson.today).toEqual('Starting a task')
 
       done()
     })

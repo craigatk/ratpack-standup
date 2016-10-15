@@ -2,6 +2,7 @@ import groovy.json.JsonSlurper
 import org.h2.jdbcx.JdbcDataSource
 import standup.DatabaseMigrationService
 import standup.DefaultStatusService
+import standup.StatusBroadcaster
 import standup.StatusService
 import standup.handler.CreateStatusHandler
 import standup.handler.GetAllStatusHandler
@@ -20,6 +21,7 @@ ratpack {
         bindInstance(new DatabaseMigrationService())
         bindInstance(JsonSlurper, new JsonSlurper())
         bind(StatusService, DefaultStatusService)
+        bindInstance(new StatusBroadcaster())
         bind(CreateStatusHandler)
         bind(GetAllStatusHandler)
     }
@@ -29,6 +31,9 @@ ratpack {
                 post(CreateStatusHandler)
                 get("all", GetAllStatusHandler)
             }
+        }
+        get("ws/status") { StatusBroadcaster broadcaster ->
+            broadcaster.register context
         }
         files {
             dir("static").indexFiles("index.html")

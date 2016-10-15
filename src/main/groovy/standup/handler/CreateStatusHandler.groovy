@@ -4,6 +4,7 @@ import groovy.json.JsonSlurper
 import ratpack.handling.Context
 import ratpack.handling.Handler
 import standup.Status
+import standup.StatusBroadcaster
 import standup.StatusService
 
 import javax.inject.Inject
@@ -14,11 +15,13 @@ class CreateStatusHandler implements Handler {
 
     private final JsonSlurper jsonSlurper
     private final StatusService statusService
+    private final StatusBroadcaster statusBroadcaster
 
     @Inject
-    CreateStatusHandler(JsonSlurper jsonSlurper, StatusService statusService) {
+    CreateStatusHandler(JsonSlurper jsonSlurper, StatusService statusService, StatusBroadcaster statusBroadcaster) {
         this.jsonSlurper = jsonSlurper
         this.statusService = statusService
+        this.statusBroadcaster = statusBroadcaster
     }
 
     @Override
@@ -30,6 +33,8 @@ class CreateStatusHandler implements Handler {
         }.flatMap { status ->
             statusService.create(status)
         }.then { status ->
+            statusBroadcaster.sendMessage(status)
+
             ctx.response.send(toJson(status))
         }
     }

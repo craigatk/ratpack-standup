@@ -23,6 +23,9 @@
 import List from './components/List'
 import NavBar from './components/NavBar'
 import Submit from './components/Submit'
+import initWebsocket from './websocket'
+
+initWebsocket()
 
 export default {
   components: {
