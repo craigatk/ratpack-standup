@@ -1,6 +1,7 @@
 package standup.geb.multi
 
 import geb.Browser
+import geb.report.ReporterSupport
 import geb.spock.GebReportingSpec
 
 /**
@@ -11,6 +12,7 @@ class MultiBrowserGebSpec extends GebReportingSpec {
 
     private Browser overrideBrowser = null
 
+    // A method to get the base URL from the test class instead of Geb config (if useful)
     String getBaseUrl() {
         null
     }
@@ -50,14 +52,30 @@ class MultiBrowserGebSpec extends GebReportingSpec {
     void resetBrowser() {
         super.resetBrowser()
 
-        browserMap.values().each {
-            if (it?.config?.autoClearCookies) {
-                it.clearCookiesQuietly()
+        browserMap.each { browserId, browserFromMap ->
+            if (browserFromMap?.config?.autoClearCookies) {
+                browserFromMap.clearCookiesQuietly()
             }
             // Only cached browsers are automatically closed, so close the non-cached browsers by hand
-            it.close()
+            browserFromMap.close()
         }
 
         browserMap.clear()
+    }
+
+    @Override
+    void report(String label = "") {
+        super.report(label)
+
+        Class testClass = getClass()
+
+        browserMap.each { browserId, browserFromMap ->
+            browserFromMap.reportGroup(testClass)
+
+            String reportLabel = (label) ? "${browserId}-${label}" : browserId
+
+            String reportName = ReporterSupport.toTestReportLabel(1, 1, gebReportingSpecTestName.methodName, reportLabel)
+            browserFromMap.report(reportName)
+        }
     }
 }

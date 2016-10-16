@@ -15,7 +15,7 @@ class HomePage extends Page {
         statusDisplayList { $(".status-display").moduleList(StatusDisplayModule) }
     }
 
-    void submitStatus(String name, String yesterday, String today, String impediments = "") {
+    void submitStatus(String name, String yesterday = "", String today = "", String impediments = "") {
         nameField.value(name)
         yesterdayField.value(yesterday)
         todayField.value(today)

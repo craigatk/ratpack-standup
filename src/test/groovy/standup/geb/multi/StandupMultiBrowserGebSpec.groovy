@@ -23,12 +23,21 @@ class StandupMultiBrowserGebSpec extends MultiBrowserGebSpec {
         HomePage homePageFirstBrowser = to(HomePage)
 
         when:
-        withBrowserSession('other') {
+        withBrowserSession('second') {
             HomePage homePageSecondBrowser = to(HomePage)
-            homePageSecondBrowser.submitStatus('Other Name', 'Other yesterday', 'Other today')
+            homePageSecondBrowser.submitStatus('Second browser')
         }
 
         then:
-        waitFor { homePageFirstBrowser.findStatusFor('Other Name') }
+        waitFor { homePageFirstBrowser.findStatusFor('Second browser') }
+
+        when:
+        homePageFirstBrowser.submitStatus('First browser')
+
+        then:
+        withBrowserSession('second') {
+            HomePage homePageSecondBrowser = browser.page
+            waitFor { homePageSecondBrowser.findStatusFor('First browser') }
+        }
     }
 }
