@@ -27,7 +27,7 @@ class StandupGebSpec extends GebReportingSpec {
         homePage.submitStatus(name, yesterday, today)
 
         then:
-        waitFor { homePage.numberOfStatusDisplays == 1 }
+        waitFor { homePage.hasStatusFor(name) }
 
         and:
         StatusDisplayModule myStatus = homePage.findStatusFor(name)
@@ -36,11 +36,8 @@ class StandupGebSpec extends GebReportingSpec {
     }
 
     void "when new status added should update existing users via WebSocket"() {
-        when:
+        given:
         HomePage homePage = to HomePage
-
-        then:
-        waitFor { homePage.numberOfStatusDisplays == 0 }
 
         when: 'adding a new status using the JSON REST API'
         aut.httpClient.requestSpec { spec ->
@@ -50,8 +47,6 @@ class StandupGebSpec extends GebReportingSpec {
         }.post("api/status")
 
         then:
-        waitFor { homePage.numberOfStatusDisplays == 1 }
-
-        assert homePage.findStatusFor('WebSocket Test')
+        waitFor { homePage.hasStatusFor('WebSocket Test') }
     }
 }

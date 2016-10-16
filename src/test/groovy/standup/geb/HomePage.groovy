@@ -24,8 +24,8 @@ class HomePage extends Page {
         submitButton.click()
     }
 
-    int getNumberOfStatusDisplays() {
-        statusDisplayList.size()
+    boolean hasStatusFor(String name) {
+        statusDisplayList.any { it.name == name }
     }
 
     StatusDisplayModule findStatusFor(String name) {
