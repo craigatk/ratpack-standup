@@ -92,3 +92,7 @@ task assembleJs(type: NpmTask, dependsOn: 'npmInstall') {
   args = ['run', 'build']
 }
 shadowJar.dependsOn('assembleJs')
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.1'
+}
