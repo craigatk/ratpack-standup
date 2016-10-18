@@ -17,6 +17,13 @@ class MultiBrowserGebSpec extends GebReportingSpec {
         null
     }
 
+    /**
+     * Run Geb commands in a separate browser window, creating it if necessary.
+     *
+     * @param browserId user-specified identifier string to reference this browser instance. If a browser with this ID
+     *                  was used previously in the same test, will re-use it. Otherwise, will create a new browser.
+     * @param c Closure with the code you want to execute in the separate browser.
+     */
     void withBrowserSession(String browserId, Closure c) {
         if (!browserMap[browserId]) {
             Browser browser = createBrowser()
@@ -41,11 +48,7 @@ class MultiBrowserGebSpec extends GebReportingSpec {
 
     @Override
     Browser getBrowser() {
-        if (overrideBrowser) {
-            return overrideBrowser
-        } else {
-            return super.getBrowser()
-        }
+        overrideBrowser ?: super.getBrowser()
     }
 
     @Override
@@ -56,7 +59,7 @@ class MultiBrowserGebSpec extends GebReportingSpec {
             if (browserFromMap?.config?.autoClearCookies) {
                 browserFromMap.clearCookiesQuietly()
             }
-            // Only cached browsers are automatically closed, so close the non-cached browsers by hand
+            // Only cached browsers are automatically closed, so close all the non-cached browsers by hand
             browserFromMap.close()
         }
 
