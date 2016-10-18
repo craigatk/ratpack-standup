@@ -64,10 +64,6 @@ node {
   nodeModulesDir = file("${project.projectDir}/src/app")
 }
 
-task npmShrinkwrap(type: NpmTask, dependsOn: 'nodeSetup') {
-  args = ['shrinkwrap', '--dev']
-}
-
 test {
   exclude '**/*GebSpec*'
 }
