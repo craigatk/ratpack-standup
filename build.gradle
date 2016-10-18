@@ -53,6 +53,9 @@ node {
   // Version of node to use.
   version = '6.8.1'
 
+  // Version of npm to use.
+  npmVersion = '3.10.9'
+
   // If true, it will download node using above parameters.
   // If false, it will try to use globally installed node.
   download = true
@@ -62,6 +65,10 @@ node {
 
   // Set the work directory where node_modules should be located
   nodeModulesDir = file("${project.projectDir}/src/app")
+}
+
+task npmShrinkwrap(type: NpmTask, dependsOn: 'nodeSetup') {
+  args = ['shrinkwrap', '--dev']
 }
 
 test {
