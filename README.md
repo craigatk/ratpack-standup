@@ -3,8 +3,8 @@
 ## Requirements
 * Java 8 SDK for Ratpack backend
 * For running browser functional tests either
+    * Chrome (default)
     * Firefox v47.0.1
-    * Chrome
 
 ## Ratpack backend
 The Ratpack backend app uses an in-memory H2 database, so it doesn't require any other database to be installed on your machine.
@@ -46,9 +46,9 @@ Since the browser tests rely on the Webpack assets being built which can take a 
 gradlew testBrowser
 ```
 
-By default, the browser functional tests will run in Firefox. To run the tests in Chrome, run
+By default, the browser functional tests will run in Chrome. To run the tests in Firefox, run
 ```
-gradlew -Dgeb.env=chrome testBrowser
+gradlew -Dgeb.env=firefox testBrowser
 ```
 
 To run Javascript unit tests for the Vue frontend app, you can either use Gradle

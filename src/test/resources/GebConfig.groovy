@@ -4,16 +4,16 @@ import org.openqa.selenium.firefox.FirefoxDriver
 
 reportsDir = "build/geb"
 
-driver = { new FirefoxDriver() }
+driver = {
+    // Download and configure ChromeDriver using https://github.com/bonigarcia/webdrivermanager
+    ChromeDriverManager.getInstance().setup()
+
+    new ChromeDriver()
+}
 
 environments {
-
-    // run with "gradlew -Dgeb.env=chrome testBrowser"
-    // ChromeDriver reference: https://sites.google.com/a/chromium.org/chromedriver/
-    chrome {
-        // Download and configure ChromeDriver using https://github.com/bonigarcia/webdrivermanager
-        ChromeDriverManager.getInstance().setup()
-
-        driver = { new ChromeDriver() }
+    // run with "gradlew -Dgeb.env=firefox testBrowser"
+    firefox {
+        driver = { new FirefoxDriver() }
     }
 }
