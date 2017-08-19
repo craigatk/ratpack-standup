@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath "io.ratpack:ratpack-gradle:1.4.3"
+    classpath "io.ratpack:ratpack-gradle:1.5.0-rc-2"
     classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
   }
 }
@@ -33,7 +33,7 @@ dependencies {
   testCompile 'cglib:cglib:2.2.2'
   testCompile 'org.objenesis:objenesis:2.1'
 
-  testCompile("org.gebish:geb-spock:1.0") {
+  testCompile("org.gebish:geb-spock:1.1.1") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
   testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
