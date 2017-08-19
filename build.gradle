@@ -36,12 +36,12 @@ dependencies {
   testCompile("org.gebish:geb-spock:1.1.1") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
-  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
-  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
+  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:3.5.1"
+  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:3.5.1"
 
   // For downloading browser-specific drivers that browsers like Chrome and IE require
   // From https://github.com/bonigarcia/webdrivermanager
-  testCompile("io.github.bonigarcia:webdrivermanager:1.4.9") {
+  testCompile("io.github.bonigarcia:webdrivermanager:1.7.1") {
     exclude group: 'org.seleniumhq.selenium'
   }
 

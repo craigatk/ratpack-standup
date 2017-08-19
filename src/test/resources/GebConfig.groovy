@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager
+import io.github.bonigarcia.wdm.FirefoxDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 
@@ -14,6 +15,9 @@ driver = {
 environments {
     // run with "gradlew -Dgeb.env=firefox testBrowser"
     firefox {
-        driver = { new FirefoxDriver() }
+        driver = {
+            FirefoxDriverManager.getInstance().setup()
+            new FirefoxDriver()
+        }
     }
 }

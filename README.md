@@ -4,7 +4,7 @@
 * Java 8 SDK for Ratpack backend
 * For running browser functional tests either
     * Chrome (default)
-    * Firefox v47.0.1
+    * Firefox
 
 ## Ratpack backend
 The Ratpack backend app uses an in-memory H2 database, so it doesn't require any other database to be installed on your machine.
