@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath "io.ratpack:ratpack-gradle:1.5.0-rc-2"
+    classpath "io.ratpack:ratpack-gradle:1.5.0"
     classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
   }
 }
@@ -94,5 +94,5 @@ task assembleJs(type: NpmTask, dependsOn: 'npmInstall') {
 shadowJar.dependsOn('assembleJs')
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '4.1'
+  gradleVersion = '4.2'
 }
